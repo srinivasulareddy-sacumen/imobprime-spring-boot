@@ -2,12 +2,25 @@ package org.imobprime.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "imobiliaria")
 public class RealEstate implements Serializable {
 
 	private static final long serialVersionUID = 7652175499822564556L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_imobiliaria")
 	private Integer id;
 	
+	@Column(name = "razao_social")
 	private String name;
 
 	public Integer getId() {

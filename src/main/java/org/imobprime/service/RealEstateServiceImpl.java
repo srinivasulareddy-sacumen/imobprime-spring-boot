@@ -1,14 +1,20 @@
 package org.imobprime.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.imobprime.model.RealEstate;
+import org.imobprime.repository.RealEstateRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service("realEstateService")
 public class RealEstateServiceImpl implements RealEstateService {
 
+	@Autowired
+    RealEstateRepository realEstateRepository;
+	
 	@Override
 	public RealEstate findById(Integer id) {
 		// TODO Auto-generated method stub
@@ -41,13 +47,8 @@ public class RealEstateServiceImpl implements RealEstateService {
 
 	@Override
 	public List<RealEstate> findAll() {
-		RealEstate r1 = new RealEstate();
-		r1.setId(1);
-		r1.setName("IBagy");
-		
-		List list = new ArrayList<RealEstate>();
-		list.add(r1);
-		return list;
+		Pageable pageable = new PageRequest(0, 25);
+		return realEstateRepository.findAll(pageable).getContent();
 	}
 
 	@Override
