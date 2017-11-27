@@ -20,8 +20,24 @@ public class RealEstate implements Serializable {
 	@Column(name = "id_imobiliaria")
 	private Integer id;
 	
-	@Column(name = "razao_social")
+	@Column(name = "razao_social", nullable = false, length = 255)
 	private String name;
+	
+	@Column(name = "cnpj", nullable = false)
+	private Integer cnpj;
+	
+	@Column(name = "cofeci", nullable = false)
+	private Integer cofeci;
+	
+	@Column(name = "logo_path", nullable = true, length = 255)
+	private String logoImagePath;
+	
+	@Column(name = "endereco_numero", nullable = true)
+	private Integer adressNumber;
+	
+	@Column(name = "endereco_complemento", nullable = true, length = 55)
+	private String adressDescription;
+	
 
 	public Integer getId() {
 		return id;
