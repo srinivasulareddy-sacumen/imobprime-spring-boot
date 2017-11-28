@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -38,7 +40,10 @@ public class RealEstate implements Serializable {
 	@Column(name = "endereco_complemento", nullable = true, length = 55)
 	private String adressDescription;
 	
-
+	@ManyToOne
+    @JoinColumn(name = "id_endereco_cep")
+	private ZipCode addressZipCode;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -53,6 +58,54 @@ public class RealEstate implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Integer getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(Integer cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public Integer getCofeci() {
+		return cofeci;
+	}
+
+	public void setCofeci(Integer cofeci) {
+		this.cofeci = cofeci;
+	}
+
+	public String getLogoImagePath() {
+		return logoImagePath;
+	}
+
+	public void setLogoImagePath(String logoImagePath) {
+		this.logoImagePath = logoImagePath;
+	}
+
+	public Integer getAdressNumber() {
+		return adressNumber;
+	}
+
+	public void setAdressNumber(Integer adressNumber) {
+		this.adressNumber = adressNumber;
+	}
+
+	public String getAdressDescription() {
+		return adressDescription;
+	}
+
+	public void setAdressDescription(String adressDescription) {
+		this.adressDescription = adressDescription;
+	}
+
+	public ZipCode getAddressZipCode() {
+		return addressZipCode;
+	}
+
+	public void setAddressZipCode(ZipCode addressZipCode) {
+		this.addressZipCode = addressZipCode;
 	}
 
 	@Override
