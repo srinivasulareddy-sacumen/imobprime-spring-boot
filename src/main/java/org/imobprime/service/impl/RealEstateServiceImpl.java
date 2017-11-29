@@ -1,15 +1,13 @@
 package org.imobprime.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.imobprime.dao.RealEstateDAO;
 import org.imobprime.model.RealEstate;
 import org.imobprime.repository.RealEstateRepository;
 import org.imobprime.service.RealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +27,11 @@ public class RealEstateServiceImpl implements RealEstateService {
 //		Page<RealEstate> realEstates = realEstateRepository.findAll(pageable);
 //		return realEstates.getContent();
 		return realEstateDAO.findAll();
+	}
+	
+	@Override
+	public List<RealEstate> findAll(Map<String, String> parameters) {
+		return realEstateDAO.findAll(parameters);
 	}
 
 	@Override
