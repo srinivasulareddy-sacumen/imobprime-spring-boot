@@ -1,10 +1,11 @@
-package org.imobprime.service;
+package org.imobprime.service.impl;
 
 import java.util.List;
 
 import org.imobprime.dao.RealEstateDAO;
 import org.imobprime.model.RealEstate;
 import org.imobprime.repository.RealEstateRepository;
+import org.imobprime.service.RealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
