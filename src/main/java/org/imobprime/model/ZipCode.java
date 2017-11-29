@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,6 +33,10 @@ public class ZipCode implements Serializable {
 
 	@Column(name = "tipo", nullable = false, length = 255)
 	private String type;
+	
+	@ManyToOne
+    @JoinColumn(name = "id_cidade")
+	private City city;
 
 	public Integer getId() {
 		return id;
@@ -70,6 +76,14 @@ public class ZipCode implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
 	}
 
 	@Override
