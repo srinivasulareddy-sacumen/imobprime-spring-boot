@@ -22,7 +22,9 @@ public class RealEstateJPA implements RealEstateDAO {
 	public List<RealEstate> findAll() {
 		TypedQuery<RealEstate> query = entityManager.createQuery(
 			"select r from RealEstate r "
-		  + "left join fetch r.addressZipCode "
+		  + "left join fetch r.addressZipCode z "
+		  + "left join fetch z.city c "
+	  	  + "left join fetch c.state s "
 		  + "order by r.name ASC", RealEstate.class);
 		
 		query.setMaxResults(25);

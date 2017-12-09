@@ -45,7 +45,7 @@ public class RealEstateRestController {
 	}
 	
 	@GetMapping("real-estates/filter")
-	public ResponseEntity<List<RealEstate>> filter(
+	public ResponseEntity<?> filter(
 			@RequestParam String name, 
 			@RequestParam String cnpj, 
 			@RequestParam Integer stateId, 
@@ -70,7 +70,7 @@ public class RealEstateRestController {
 
 		if (realEstates.isEmpty()) {
 			logger.info("There is no real estates in database.");
-			// return new ResponseEntity<>(realEstates, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		
 		return new ResponseEntity<>(realEstates, HttpStatus.OK);

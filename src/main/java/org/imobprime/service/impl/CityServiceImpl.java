@@ -3,6 +3,7 @@ package org.imobprime.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.imobprime.dao.CityDAO;
 import org.imobprime.model.City;
@@ -25,7 +26,16 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public List<City> findAll() {
 		PageRequest request = new PageRequest(0, 25, Sort.Direction.ASC, "name");
-		return cityRepository.findAll(request).getContent();
+		List<City> cities = cityRepository.findAll(request).getContent();
+		
+		return cities.stream().map((c) -> {
+			City newCity = new City();
+			
+			newCity.setId(c.getId());
+			newCity.setName(c.getName());
+			
+			return newCity;
+		}).collect(Collectors.toList());
 	}
 
 	@Override
