@@ -36,7 +36,7 @@ public class RealEstateServiceImpl implements RealEstateService {
 
 	@Override
 	public RealEstate findById(Integer id) {
-		return realEstateRepository.findOne(id);
+		return realEstateDAO.findOne(id);
 	}
 
 	@Override

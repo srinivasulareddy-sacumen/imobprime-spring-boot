@@ -11,4 +11,6 @@ public interface RealEstateDAO {
 
 	public List<RealEstate> findAll(Map<String, String> parameters);
 	
+	public RealEstate findOne(Integer id);
+	
 }

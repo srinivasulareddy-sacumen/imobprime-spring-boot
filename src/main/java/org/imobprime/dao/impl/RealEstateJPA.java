@@ -91,5 +91,19 @@ public class RealEstateJPA implements RealEstateDAO {
 		queryStr += "ORDER BY r.name ASC";
 		return queryStr;
 	}
+	
+	@Override
+	public RealEstate findOne(Integer id) {
+		TypedQuery<RealEstate> query = entityManager.createQuery(
+			"select r from RealEstate r "
+		  + "left join fetch r.addressZipCode z "
+		  + "left join fetch z.city c "
+	  	  + "left join fetch c.state s "
+	  	  + "where r.id = :id", RealEstate.class);
+			
+		query.setMaxResults(1);
+		query.setParameter("id", id);
+		return query.getResultList().get(0);
+	}
 
 }
