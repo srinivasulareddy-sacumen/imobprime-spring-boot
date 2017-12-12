@@ -35,10 +35,10 @@ public class RealEstate implements Serializable {
 	private String logoImagePath;
 	
 	@Column(name = "endereco_numero", nullable = true)
-	private Integer adressNumber;
+	private Integer addressNumber;
 	
 	@Column(name = "endereco_complemento", nullable = true, length = 55)
-	private String adressDescription;
+	private String addressDescription;
 	
 	@ManyToOne
     @JoinColumn(name = "id_endereco_cep")
@@ -84,20 +84,20 @@ public class RealEstate implements Serializable {
 		this.logoImagePath = logoImagePath;
 	}
 
-	public Integer getAdressNumber() {
-		return adressNumber;
+	public Integer getAddressNumber() {
+		return addressNumber;
 	}
 
-	public void setAdressNumber(Integer adressNumber) {
-		this.adressNumber = adressNumber;
+	public String getAddressDescription() {
+		return addressDescription;
 	}
 
-	public String getAdressDescription() {
-		return adressDescription;
+	public void setAddressNumber(Integer addressNumber) {
+		this.addressNumber = addressNumber;
 	}
 
-	public void setAdressDescription(String adressDescription) {
-		this.adressDescription = adressDescription;
+	public void setAddressDescription(String addressDescription) {
+		this.addressDescription = addressDescription;
 	}
 
 	public ZipCode getAddressZipCode() {
