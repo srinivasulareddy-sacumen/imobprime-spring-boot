@@ -95,12 +95,12 @@ public class RealEstateRestController {
 	}
 
 	@PutMapping("real-estates")
-	public ResponseEntity<RealEstate> update(@RequestBody RealEstate realEstate) {
+	public ResponseEntity<Void> update(@RequestBody RealEstate realEstate) {
 		logger.info("Updating the real estate.");
 		realEstateService.update(realEstate);
-		logger.info("Real estate updated with success.");
 		
-		return new ResponseEntity<>(realEstate, HttpStatus.OK);
+		logger.info("Real estate updated with success.");
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@DeleteMapping("real-estates/{id}")

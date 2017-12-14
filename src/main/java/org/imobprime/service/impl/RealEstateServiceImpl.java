@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.imobprime.dao.RealEstateDAO;
 import org.imobprime.model.RealEstate;
+import org.imobprime.model.ZipCode;
 import org.imobprime.repository.RealEstateRepository;
+import org.imobprime.repository.ZipCodeRepository;
 import org.imobprime.service.RealEstateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ public class RealEstateServiceImpl implements RealEstateService {
 
 	@Autowired
 	RealEstateRepository realEstateRepository;
+	@Autowired
+	ZipCodeRepository zipCodeRepository;
 	
 	@Autowired
 	RealEstateDAO realEstateDAO;
@@ -48,6 +52,9 @@ public class RealEstateServiceImpl implements RealEstateService {
 	@Override
 	@Transactional
 	public void update(RealEstate realEstate) {
+		ZipCode zipCode = zipCodeRepository.findOne(realEstate.getAddressZipCode().getId());
+		realEstate.setAddressZipCode(zipCode);
+		
 		realEstateRepository.save(realEstate);
 	}
 
