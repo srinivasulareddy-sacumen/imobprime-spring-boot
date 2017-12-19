@@ -21,4 +21,9 @@ public class StateServiceImpl implements StateService {
 		return stateRepository.findAll(sort);
 	}
 
+	@Override
+	public State findByAbbreviation(String abbreviation) {
+		return stateRepository.findByStateAbbreviation(abbreviation);
+	}
+
 }

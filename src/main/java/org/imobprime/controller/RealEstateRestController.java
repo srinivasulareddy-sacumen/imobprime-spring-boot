@@ -91,6 +91,7 @@ public class RealEstateRestController {
 		realEstateService.save(realEstate);
 		logger.info("Real estate saved with success.");
 		
+		realEstate.setAddressZipCode(null);
 		return new ResponseEntity<>(realEstate, HttpStatus.OK);
 	}
 

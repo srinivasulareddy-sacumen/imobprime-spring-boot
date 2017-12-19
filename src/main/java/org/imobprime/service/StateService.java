@@ -8,4 +8,6 @@ public interface StateService {
 
 	List<State> findAll();
 	
+	State findByAbbreviation(String abbreviation);
+	
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.imobprime.dao.RealEstateDAO;
 import org.imobprime.model.RealEstate;
 import org.imobprime.model.ZipCode;
+import org.imobprime.repository.CityRepository;
 import org.imobprime.repository.RealEstateRepository;
 import org.imobprime.repository.ZipCodeRepository;
 import org.imobprime.service.RealEstateService;
@@ -20,6 +21,8 @@ public class RealEstateServiceImpl implements RealEstateService {
 	RealEstateRepository realEstateRepository;
 	@Autowired
 	ZipCodeRepository zipCodeRepository;
+	@Autowired
+	CityRepository cityRepository;
 	
 	@Autowired
 	RealEstateDAO realEstateDAO;
@@ -46,13 +49,33 @@ public class RealEstateServiceImpl implements RealEstateService {
 	@Override
 	@Transactional
 	public void save(RealEstate realEstate) {
+		ZipCode zipCode = findOrSaveZipCode(realEstate);
+		realEstate.setAddressZipCode(zipCode);
+		
 		realEstateRepository.save(realEstate);
+	}
+
+	private ZipCode findOrSaveZipCode(RealEstate realEstate) {
+		ZipCode zipCode = null;
+		
+		// we have to create a new zipCode
+		if(realEstate.getAddressZipCode().getId() == null) {
+			zipCode = realEstate.getAddressZipCode();
+			
+			Integer cityId = zipCode.getCity().getId();
+			zipCode.setCity(cityRepository.findOne(cityId));
+			
+			zipCodeRepository.save(zipCode);
+		} else {
+			zipCode = zipCodeRepository.findOne(realEstate.getAddressZipCode().getId());
+		}
+		return zipCode;
 	}
 
 	@Override
 	@Transactional
 	public void update(RealEstate realEstate) {
-		ZipCode zipCode = zipCodeRepository.findOne(realEstate.getAddressZipCode().getId());
+		ZipCode zipCode = findOrSaveZipCode(realEstate);
 		realEstate.setAddressZipCode(zipCode);
 		
 		realEstateRepository.save(realEstate);

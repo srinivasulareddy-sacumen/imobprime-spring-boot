@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,6 +35,12 @@ public class StateRestController {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<>(states, HttpStatus.OK);
+	}
+	
+	@GetMapping("states/{abbreviation}")
+	public ResponseEntity<State> getByAbbreviation(@PathVariable("abbreviation") String abbreviation) {
+		State state = stateService.findByAbbreviation(abbreviation);
+		return new ResponseEntity<>(state, HttpStatus.OK);
 	}
 	
 }
