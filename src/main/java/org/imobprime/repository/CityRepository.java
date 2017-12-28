@@ -11,4 +11,6 @@ public interface CityRepository extends JpaRepository<City, Integer> {
 
 	List<City> findByNameOrderByNameAsc(String name);
 	
+	List<City> findByNameLike(String name);
+	
 }

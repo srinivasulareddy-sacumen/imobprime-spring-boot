@@ -9,4 +9,6 @@ public interface CityDAO {
 
 	public List<City> findAll(Map<String, String> parameters);
 	
+	public City findOneByNameAndStateAbbreviation(String cityName, String stateAbbreviation);
+	
 }

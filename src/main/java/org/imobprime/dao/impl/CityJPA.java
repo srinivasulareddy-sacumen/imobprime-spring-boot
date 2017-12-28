@@ -56,4 +56,21 @@ public class CityJPA implements CityDAO {
 		return queryStr;
 	}
 
+	@Override
+	public City findOneByNameAndStateAbbreviation(String cityName, String stateAbbreviation) {
+		String queryStr = 
+			"SELECT c FROM City c "
+		  + "LEFT JOIN FETCH c.state s "
+		  + "where c.name = :name "
+		  + "and s.stateAbbreviation = :stateAbbreviation "; 
+
+		TypedQuery<City> query = entityManager.createQuery(queryStr, City.class);
+		query.setMaxResults(0);
+		
+		query.setParameter("name", cityName);
+		query.setParameter("stateAbbreviation", stateAbbreviation);
+		
+		return query.getResultList().get(0);
+	}
+
 }

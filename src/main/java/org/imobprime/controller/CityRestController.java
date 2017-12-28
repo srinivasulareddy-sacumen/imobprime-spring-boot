@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +45,26 @@ public class CityRestController {
 			logger.info("There is no cities in database with the filter.");
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
+		
+		return new ResponseEntity<>(cities, HttpStatus.OK);
+	}
+	
+	@GetMapping("cities/{cityName}/{stateAbbreviation}")
+	public ResponseEntity<City> getByNameAndStateAbbreviation(
+			@PathVariable("cityName") String cityName, @PathVariable("stateAbbreviation") String stateAbbreviation) {
+		logger.info("Fetching city by cityName and stateAbbreviation.");
+		City city = cityService.findByNameAndStateAbbreviation(cityName, stateAbbreviation);
+		logger.info("City fetched with sucess.");
+
+		return new ResponseEntity<>(city, HttpStatus.OK);
+	}
+	
+	@GetMapping("cities/{cityName}")
+	public ResponseEntity<?> listAllByName(@PathVariable("cityName") String cityName) {
+		logger.info("Fetching all cities by name.");
+		
+		//TODO test me
+		List<City> cities = cityService.findAll();
 		
 		return new ResponseEntity<>(cities, HttpStatus.OK);
 	}

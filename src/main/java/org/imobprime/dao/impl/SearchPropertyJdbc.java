@@ -27,7 +27,7 @@ public class SearchPropertyJdbc implements SearchPropertyDAO {
 			"limit 0, 50";
 		
 		return jdbcTemplate.query(
-			query, new Object[] { 4500 },
+			query, new Object[] { Integer.parseInt(parameters.get("cityId")) },
 			(rs, rowNum) -> {
 				Property p = new Property();
 				p.setId(rs.getInt("id_imovel"));

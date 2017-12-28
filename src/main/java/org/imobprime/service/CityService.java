@@ -10,4 +10,6 @@ public interface CityService {
 	
 	List<City> findAll(String name, Integer stateId);
 	
+	City findByNameAndStateAbbreviation(String cityName, String stateAbbreviation);
+	
 }

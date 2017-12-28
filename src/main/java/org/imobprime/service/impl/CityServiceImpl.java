@@ -56,4 +56,9 @@ public class CityServiceImpl implements CityService {
 		return cityDAO.findAll(parameters);
 	}
 
+	@Override
+	public City findByNameAndStateAbbreviation(String cityName, String stateAbbreviation) {
+		return cityDAO.findOneByNameAndStateAbbreviation(cityName, stateAbbreviation);
+	}
+
 }
