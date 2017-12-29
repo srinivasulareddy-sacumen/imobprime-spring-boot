@@ -73,4 +73,25 @@ public class CityJPA implements CityDAO {
 		return query.getResultList().get(0);
 	}
 
+	@Override
+	public List<City> findAllByName(String cityName) {
+		String queryStr = "SELECT c FROM City c LEFT JOIN FETCH c.state s ";
+		
+		if (!"".equals(cityName)) {
+			queryStr += "WHERE c.name LIKE :name ";
+		}
+		
+		queryStr += "order by c.name ";
+		
+		TypedQuery<City> query = entityManager.createQuery(queryStr, City.class);
+		
+		query.setMaxResults(25);
+		
+		if (!"".equals(cityName)) {
+			query.setParameter("name", cityName + "%");
+		}
+		
+		return query.getResultList();
+	}
+
 }

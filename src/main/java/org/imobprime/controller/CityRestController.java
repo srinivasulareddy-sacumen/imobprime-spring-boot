@@ -59,12 +59,11 @@ public class CityRestController {
 		return new ResponseEntity<>(city, HttpStatus.OK);
 	}
 	
-	@GetMapping("cities/{cityName}")
-	public ResponseEntity<?> listAllByName(@PathVariable("cityName") String cityName) {
+	@GetMapping("cities/filterByName")
+	public ResponseEntity<?> listAllByName(@RequestParam("cityName") String cityName) {
 		logger.info("Fetching all cities by name.");
 		
-		//TODO test me
-		List<City> cities = cityService.findAll();
+		List<City> cities = cityService.findAll(cityName);
 		
 		return new ResponseEntity<>(cities, HttpStatus.OK);
 	}

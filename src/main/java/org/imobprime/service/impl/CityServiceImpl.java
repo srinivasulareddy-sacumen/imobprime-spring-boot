@@ -61,4 +61,21 @@ public class CityServiceImpl implements CityService {
 		return cityDAO.findOneByNameAndStateAbbreviation(cityName, stateAbbreviation);
 	}
 
+	@Override
+	public List<City> findAll(final String name) {
+		final String nameParam = name.trim();
+		
+//		return cityRepository.findAll()
+//				.stream()
+//				.filter((City c) -> {
+//					if("".equals(nameParam)) return true;
+//					
+//					return c.getName().toLowerCase().contains(nameParam.toLowerCase());
+//				})
+//				.limit(20)
+//				.collect(Collectors.toList());
+		
+		return cityDAO.findAllByName(nameParam);
+	}
+
 }

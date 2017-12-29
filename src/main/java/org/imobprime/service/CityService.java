@@ -8,6 +8,8 @@ public interface CityService {
 
 	List<City> findAll();
 	
+	List<City> findAll(String name);
+	
 	List<City> findAll(String name, Integer stateId);
 	
 	City findByNameAndStateAbbreviation(String cityName, String stateAbbreviation);
