@@ -94,4 +94,18 @@ public class CityJPA implements CityDAO {
 		return query.getResultList();
 	}
 
+	@Override
+	public City findOneById(Integer id) {
+		String queryStr = 
+			"SELECT c FROM City c "
+		  + "LEFT JOIN FETCH c.state s "
+		  + "WHERE c.id = :id ";
+		
+		TypedQuery<City> query = entityManager.createQuery(queryStr, City.class);
+		query.setMaxResults(1);
+		query.setParameter("id", id);
+		
+		return query.getResultList().get(0);
+	}
+
 }

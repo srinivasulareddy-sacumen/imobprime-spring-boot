@@ -14,4 +14,6 @@ public interface CityService {
 	
 	City findByNameAndStateAbbreviation(String cityName, String stateAbbreviation);
 	
+	City findById(Integer id);
+	
 }

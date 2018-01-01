@@ -13,4 +13,6 @@ public interface CityDAO {
 	
 	public City findOneByNameAndStateAbbreviation(String cityName, String stateAbbreviation);
 	
+	public City findOneById(Integer id);
+	
 }

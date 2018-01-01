@@ -78,4 +78,9 @@ public class CityServiceImpl implements CityService {
 		return cityDAO.findAllByName(nameParam);
 	}
 
+	@Override
+	public City findById(Integer id) {
+		return cityDAO.findOneById(id);
+	}
+
 }

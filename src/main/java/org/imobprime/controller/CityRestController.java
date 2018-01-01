@@ -62,10 +62,18 @@ public class CityRestController {
 	@GetMapping("cities/filterByName")
 	public ResponseEntity<?> listAllByName(@RequestParam("cityName") String cityName) {
 		logger.info("Fetching all cities by name.");
-		
 		List<City> cities = cityService.findAll(cityName);
 		
 		return new ResponseEntity<>(cities, HttpStatus.OK);
+	}
+	
+	@GetMapping("cities/{id}")
+	public ResponseEntity<City> getById(@PathVariable("id") Integer id) {
+		logger.info("Fetching city by id.");
+		City city = cityService.findById(id);
+		logger.info("City fetched with sucess.");
+		
+		return new ResponseEntity<>(city, HttpStatus.OK);
 	}
 		
 }
