@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -47,6 +49,14 @@ public class Property implements Serializable {
 	
 	@Column(name = "dados_endereco", nullable = true)
 	private String addressData;
+	
+	@ManyToOne
+    @JoinColumn(name = "id_tipo_imovel")
+	private PropertyType type;
+	
+	@ManyToOne
+    @JoinColumn(name = "id_situacao_atual")
+	private PropertyState state;
 
 	public Integer getId() {
 		return id;
@@ -126,6 +136,22 @@ public class Property implements Serializable {
 
 	public void setAddressData(String addressData) {
 		this.addressData = addressData;
+	}
+
+	public PropertyType getType() {
+		return type;
+	}
+
+	public void setType(PropertyType type) {
+		this.type = type;
+	}
+
+	public PropertyState getState() {
+		return state;
+	}
+
+	public void setState(PropertyState state) {
+		this.state = state;
 	}
 
 	@Override

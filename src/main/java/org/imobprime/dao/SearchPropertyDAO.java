@@ -9,4 +9,6 @@ public interface SearchPropertyDAO {
 
 	public List<Property> findAllMostRecent(Map<String, String> parameters);
 	
+	public List<Property> findAll(Map<String, String> parameters);
+	
 }
