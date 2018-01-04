@@ -5,7 +5,7 @@ public class HomePropertySearchDTO {
 	private Integer propertyType;
 	private Integer city;
 	private String region;
-	private Integer propertyState;
+	private String propertyState;
 
 	private Double priceMin;
 	private Double priceMax;
@@ -40,11 +40,11 @@ public class HomePropertySearchDTO {
 		this.region = region;
 	}
 
-	public Integer getPropertyState() {
+	public String getPropertyState() {
 		return propertyState;
 	}
 
-	public void setPropertyState(Integer propertyState) {
+	public void setPropertyState(String propertyState) {
 		this.propertyState = propertyState;
 	}
 
@@ -94,6 +94,15 @@ public class HomePropertySearchDTO {
 
 	public void setGarages(String garages) {
 		this.garages = garages;
+	}
+
+	@Override
+	public String toString() {
+		return "{"
+				+ "propertyType=" + propertyType + ", city=" + city + ", region=" + region
+				+ ", propertyState=" + propertyState + ", priceMin=" + priceMin + ", priceMax=" + priceMax
+				+ ", areaMin=" + areaMin + ", areaMax=" + areaMax + ", bedrooms=" + bedrooms + ", garages=" + garages
+			 + "}";
 	}
 
 }

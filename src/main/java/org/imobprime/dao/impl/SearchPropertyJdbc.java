@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.imobprime.controller.HomePropertySearchDTO;
 import org.imobprime.dao.SearchPropertyDAO;
 import org.imobprime.model.Property;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,31 +46,36 @@ public class SearchPropertyJdbc implements SearchPropertyDAO {
 	}
 
 	@Override
-	public List<Property> findAll(Map<String, String> parameters) {
+	public List<Property> findAll(HomePropertySearchDTO homePropertySearchDTO) {
 		final List<Object> params = new ArrayList<>();
-		
-		params.add(Integer.parseInt(parameters.get("cityId")));
 		
 		String query = 
 			"select * from imovel " + 
 			"left outer join tipo_imovel on ( imovel.id_tipo_imovel = tipo_imovel.id_tipo_imovel ) " + 
-			"left outer join situacao_imovel on ( imovel.id_situacao_atual = situacao_imovel.id_situacao_imovel ) " + 
-			"where `dados_endereco` -> '$.cidade.id_cidade' = ? "; 
+			"left outer join situacao_imovel on ( imovel.id_situacao_atual = situacao_imovel.id_situacao_imovel ) \n" + 
+			"where `dados_endereco` -> '$.cidade.id_cidade' = ? \n"; 
+		
+		params.add(homePropertySearchDTO.getCity());
+		
+		if (homePropertySearchDTO.getPropertyState() != null) {
+			query += "and imovel.id_situacao_atual = ? \n";
 			
-		if (!parameters.get("propertyState").trim().equals("")) {
-			query += "and imovel.id_situacao_atual = ? ";
-			params.add(Integer.parseInt(parameters.get("propertyState")));
+			if (homePropertySearchDTO.getPropertyState().equals("for_sale")) {
+				params.add(1);
+			} else if (homePropertySearchDTO.getPropertyState().equals("for_rent")) {
+				params.add(3);
+			}
 		}
 		
-		if (!parameters.get("propertyType").trim().equals("")) {
-			query += "and imovel.id_tipo_imovel = ? ";
-			params.add(Integer.parseInt(parameters.get("propertyType")));
+		if (homePropertySearchDTO.getPropertyType() != null) {
+			query += "and imovel.id_tipo_imovel = ? \n";
+			params.add(homePropertySearchDTO.getPropertyType());
 		}
 		
-		if (!parameters.get("region").trim().equals("")) {
-			query += "and upper(JSON_EXTRACT(`dados_endereco`, '$.bairro')) like ? ";
-			String region = "\"" + parameters.get("region").toUpperCase() + "%";
-			System.out.println(region);
+		if (!homePropertySearchDTO.getRegion().trim().equals("")) {
+			query += "and upper(JSON_EXTRACT(`dados_endereco`, '$.bairro')) like ? \n";
+			String region = "\"" + homePropertySearchDTO.getRegion().toUpperCase() + "%";
+			//System.out.println(region);
 			params.add(region);
 		}
 
@@ -81,6 +87,9 @@ public class SearchPropertyJdbc implements SearchPropertyDAO {
 		query +=
 			"order by imovel.id_imovel desc " + 
 			"limit 0, 50";
+		
+		System.out.println("\n" + query);
+		System.out.println(params + "\n");
 		
 		return jdbcTemplate.query(
 			query, params.toArray(),
