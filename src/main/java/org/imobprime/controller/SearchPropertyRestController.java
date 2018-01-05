@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.imobprime.dao.SearchPropertyDAO;
 import org.imobprime.model.Property;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class SearchPropertyRestController {
 
+	public static final Logger logger = LoggerFactory.getLogger(SearchPropertyRestController.class);
+	
 	@Autowired
 	SearchPropertyDAO searchPropertyDAO;
 	
@@ -41,7 +45,7 @@ public class SearchPropertyRestController {
 	
 	@PostMapping("searchProperties")
 	public ResponseEntity<?> search(@RequestBody HomePropertySearchDTO search) {
-		System.out.println(search);
+		logger.debug(search.toString());
 		List<Property> properties = searchPropertyDAO.findAll(search);
 		return new ResponseEntity<>(properties, HttpStatus.OK);
 	}

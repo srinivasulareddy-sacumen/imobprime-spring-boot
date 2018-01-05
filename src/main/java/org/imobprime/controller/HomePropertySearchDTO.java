@@ -2,8 +2,8 @@ package org.imobprime.controller;
 
 public class HomePropertySearchDTO {
 
-	private Integer propertyType;
 	private Integer city;
+	private Integer propertyType;
 	private String region;
 	private String propertyState;
 
