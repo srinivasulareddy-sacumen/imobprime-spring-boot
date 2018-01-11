@@ -1,8 +1,11 @@
 package org.imobprime.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.imobprime.controller.AgentSearchDTO;
 import org.imobprime.dao.AgentDAO;
 import org.imobprime.model.Agent;
 import org.imobprime.repository.AgentRepository;
@@ -33,10 +36,39 @@ public class AgentServiceImpl implements AgentService {
 	}
 
 	@Override
-	public List<Agent> findAll(String name, String cpf, Integer creci, Integer realEstateId, Integer stateId,
-			Integer cityId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Agent> findAll(AgentSearchDTO agentSearchDTO) {
+		Map<String, String> parameters = new HashMap<>();
+		parameters.put("name", agentSearchDTO.getName());
+		parameters.put("cpf", agentSearchDTO.getCpf());
+		
+		if(agentSearchDTO.getCreci() == null)
+			parameters.put("creci", "");
+		else
+			parameters.put("creci", String.valueOf(agentSearchDTO.getCreci()));
+		
+		if(agentSearchDTO.getRealEstateId() == null)
+			parameters.put("realEstateId", "");
+		else
+			parameters.put("realEstateId", String.valueOf(agentSearchDTO.getRealEstateId()));
+		
+		if(agentSearchDTO.getStateId() == null)
+			parameters.put("stateId", "");
+		else
+			parameters.put("stateId", String.valueOf(agentSearchDTO.getStateId()));
+		
+		if(agentSearchDTO.getCityId() == null)
+			parameters.put("cityId", "");
+		else
+			parameters.put("cityId", String.valueOf(agentSearchDTO.getCityId()));
+		
+		List<Agent> agents = agentDAO.findAll(parameters);
+		
+		return agents.stream()
+			.map(a -> {
+				a.getRealEstate().setAddressZipCode(null);
+				return a;
+			})
+			.collect(Collectors.toList());
 	}
 
 	@Override

@@ -38,10 +38,10 @@ public class Agent implements Serializable {
 	private String site;
 
 	@Column(name = "telefone", nullable = true, length = 14)
-	private String telefone;
+	private String phoneNumber;
 
 	@Column(name = "celular", nullable = true, length = 15)
-	private String celular;
+	private String cellPhoneNumber;
 
 	@ManyToOne
 	@JoinColumn(name = "id_imobiliaria")
@@ -102,21 +102,21 @@ public class Agent implements Serializable {
 	public void setSite(String site) {
 		this.site = site;
 	}
-
-	public String getTelefone() {
-		return telefone;
+	
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
-	public String getCelular() {
-		return celular;
+	public String getCellPhoneNumber() {
+		return cellPhoneNumber;
 	}
 
-	public void setCelular(String celular) {
-		this.celular = celular;
+	public void setCellPhoneNumber(String cellPhoneNumber) {
+		this.cellPhoneNumber = cellPhoneNumber;
 	}
 
 	public RealEstate getRealEstate() {
