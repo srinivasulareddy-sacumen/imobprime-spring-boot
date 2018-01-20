@@ -117,4 +117,20 @@ public class AgentJPA implements AgentDAO {
 		return queryStr;
 	}
 
+	@Override
+	public Agent findOne(Integer id) {
+		TypedQuery<Agent> query = entityManager.createQuery(
+			"select ag from Agent ag "
+		  + "left join fetch ag.realEstate r "
+		  + "left join fetch ag.city c "
+	  	  + "left join fetch ag.state s "
+	  	  + "left join fetch c.state "
+	  	  + "left join fetch r.addressZipCode "
+		  + "where ag.id = :id", Agent.class);
+
+		query.setMaxResults(1);
+		query.setParameter("id", id);
+		return query.getResultList().get(0);
+	}
+
 }

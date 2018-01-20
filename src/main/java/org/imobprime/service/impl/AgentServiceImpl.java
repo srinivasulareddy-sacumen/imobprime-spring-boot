@@ -73,13 +73,18 @@ public class AgentServiceImpl implements AgentService {
 
 	@Override
 	public Agent findById(Integer agentId) {
-		// TODO Auto-generated method stub
-		return null;
+		Agent agent = agentDAO.findOne(agentId);
+		agent.getRealEstate().setAddressZipCode(null);
+		
+		return agent;
 	}
 
 	@Override
 	@Transactional
 	public void save(Agent agent) {
+		if(agent.getCity().getId() == null)
+			agent.setCity(null);
+		
 		agentRepository.save(agent);
 	}
 

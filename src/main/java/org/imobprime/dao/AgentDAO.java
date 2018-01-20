@@ -11,4 +11,6 @@ public interface AgentDAO {
 
 	public List<Agent> findAll(Map<String, String> parameters);
 	
+	public Agent findOne(Integer id);
+	
 }
