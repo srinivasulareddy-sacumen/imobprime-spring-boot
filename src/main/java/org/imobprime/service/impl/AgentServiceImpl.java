@@ -91,6 +91,9 @@ public class AgentServiceImpl implements AgentService {
 	@Override
 	@Transactional
 	public void update(Agent agent) {
+		if(agent.getCity().getId() == null)
+			agent.setCity(null);
+		
 		agentRepository.save(agent);
 	}
 
