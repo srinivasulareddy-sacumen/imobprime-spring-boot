@@ -1,12 +1,17 @@
 package org.imobprime.dao.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.From;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
+import org.imobprime.controller.ClientSearchDTO;
 import org.imobprime.dao.ClientDAO;
 import org.imobprime.model.Client;
 import org.springframework.stereotype.Repository;
@@ -34,9 +39,41 @@ public class ClientJPA implements ClientDAO {
 	}
 
 	@Override
-	public List<Client> findAll(Map<String, String> parameters) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Client> findAll(ClientSearchDTO clientSearchDTO) {
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Client> query = builder.createQuery(Client.class);
+        Root<Client> from = query.from(Client.class);
+ 
+        From<?, ?> agent = (From<?, ?>) from.fetch("agent");
+        agent.fetch("state");
+        agent.fetch("city");
+        
+        From<?, ?> realEstate = (From<?, ?>) agent.fetch("realEstate");
+        realEstate.fetch("addressZipCode");
+        
+        Predicate predicate = builder.conjunction();
+        
+        if(!"".equals(clientSearchDTO.getName().trim())) {
+        	predicate = builder.and(predicate, 
+        		builder.like(from.get("name"), "%" + clientSearchDTO.getName() + "%"));
+        }
+        
+        if(!"".equals(clientSearchDTO.getCpf().trim())) {
+        	predicate = builder.and(predicate, 
+        		builder.like(from.get("cpf"), "%" + clientSearchDTO.getCpf() + "%"));
+        }
+        
+        // this method was not used because mysql JSON data type
+        // stateId and cityId are inside a JSON column
+        
+        query.where(predicate);
+        
+        query.orderBy(builder.asc(from.get("name")));
+        
+        TypedQuery<Client> typedQuery = entityManager.createQuery(query);
+        typedQuery.setMaxResults(25);
+        
+        return typedQuery.getResultList();
 	}
 
 	@Override
