@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,6 +53,42 @@ public class ClientRestController {
 		}
 		
 		return new ResponseEntity<>(clients, HttpStatus.OK);
+	}
+	
+	@GetMapping("/clients/{id}")
+	public ResponseEntity<Client> getById(@PathVariable("id") Integer id) {
+		logger.info("Fetching the client by id.");
+		Client client = clientService.findById(id);
+		
+		logger.info("Client fetched with sucess.");
+		return new ResponseEntity<>(client, HttpStatus.OK);
+	}
+	
+	@PostMapping("/clients")
+	public ResponseEntity<Client> save(@RequestBody Client client) {
+		logger.info("Saving the client.");
+		clientService.save(client);
+		
+		logger.info("Client saved with success.");
+		return new ResponseEntity<>(client, HttpStatus.OK);
+	}
+
+	@PutMapping("/clients")
+	public ResponseEntity<Void> update(@RequestBody Client client) {
+		// TODO: logger.info("Updating the client.");
+		clientService.update(client);
+		
+		logger.info("Client updated with success.");
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
+	@DeleteMapping("/clients/{id}")
+	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
+		logger.info("Deleting the client by id.");
+		clientService.deleteById(id);
+		
+		logger.info("Client deleted with success.");
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 }

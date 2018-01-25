@@ -6,11 +6,13 @@ import java.util.stream.Collectors;
 import org.imobprime.controller.ClientSearchDTO;
 import org.imobprime.dao.ClientDAO;
 import org.imobprime.dao.SearchClientDAO;
+import org.imobprime.model.Agent;
 import org.imobprime.model.Client;
 import org.imobprime.repository.ClientRepository;
 import org.imobprime.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -59,26 +61,35 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public Client findById(Integer clientId) {
-		// TODO Auto-generated method stub
-		return null;
+		Client client = clientDAO.findOne(clientId);
+		
+		client.getAgent().setRealEstate(null);
+		client.getAgent().setCity(null);
+		client.getAgent().setState(null);
+		
+		return client;
 	}
 
 	@Override
+	@Transactional
 	public void save(Client client) {
-		// TODO Auto-generated method stub
+		Agent agent = new Agent();
+		agent.setId(1);
 		
+		client.setAgent(agent);
+		clientRepository.save(client);
 	}
 
 	@Override
+	@Transactional
 	public void update(Client client) {
-		// TODO Auto-generated method stub
-		
+		clientRepository.save(client);
 	}
 
 	@Override
+	@Transactional
 	public void deleteById(Integer clientId) {
-		// TODO Auto-generated method stub
-		
+		clientRepository.delete(clientId);
 	}
 
 }

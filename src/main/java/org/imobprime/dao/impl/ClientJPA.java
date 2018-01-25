@@ -78,8 +78,18 @@ public class ClientJPA implements ClientDAO {
 
 	@Override
 	public Client findOne(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Client> query = entityManager.createQuery(
+			"select cli from Client cli "
+		  + "left join fetch cli.agent ag "
+		  + "left join fetch ag.state "
+		  + "left join fetch ag.city "
+		  + "left join fetch ag.realEstate real "
+		  + "left join fetch real.addressZipCode "
+		  + "where cli.id = :id", Client.class);
+
+		query.setMaxResults(1);
+		query.setParameter("id", id);
+		return query.getResultList().get(0);
 	}
 
 }
