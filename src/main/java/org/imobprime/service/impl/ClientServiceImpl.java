@@ -77,12 +77,18 @@ public class ClientServiceImpl implements ClientService {
 		agent.setId(1);
 		
 		client.setAgent(agent);
+		
 		clientRepository.save(client);
 	}
 
 	@Override
 	@Transactional
 	public void update(Client client) {
+		Agent agent = new Agent();
+		agent.setId(1);
+		
+		client.setAgent(agent);
+		
 		clientRepository.save(client);
 	}
 
