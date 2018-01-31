@@ -9,14 +9,14 @@ public interface PropertyService {
 
 	List<Property> findAll();
 	
-	List<Property> findAll(PropertySearchDTO clientSearchDTO);
+	List<Property> findAll(PropertySearchDTO propertySearchDTO);
 
-	Property findById(Integer clientId);
+	Property findById(Integer propertyId);
 
-	void save(Property client);
+	void save(Property property);
 
-	void update(Property client);
+	void update(Property property);
 
-	void deleteById(Integer clientId);
+	void deleteById(Integer propertyId);
 	
 }

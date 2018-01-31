@@ -9,7 +9,7 @@ public interface PropertyDAO {
 
 	public List<Property> findAll();
 
-	public List<Property> findAll(PropertySearchDTO clientSearchDTO);
+	public List<Property> findAll(PropertySearchDTO propertySearchDTO);
 
 	public Property findOne(Integer id);
 

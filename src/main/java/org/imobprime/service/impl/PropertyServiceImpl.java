@@ -25,31 +25,30 @@ public class PropertyServiceImpl implements PropertyService {
 	}
 
 	@Override
-	public List<Property> findAll(PropertySearchDTO clientSearchDTO) {
+	public List<Property> findAll(PropertySearchDTO propertySearchDTO) {
+		return propertyDAO.findAll(propertySearchDTO);
+	}
+
+	@Override
+	public Property findById(Integer propertyId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Property findById(Integer clientId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void save(Property client) {
+	public void save(Property property) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void update(Property client) {
+	public void update(Property property) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteById(Integer clientId) {
+	public void deleteById(Integer propertyId) {
 		// TODO Auto-generated method stub
 		
 	}
