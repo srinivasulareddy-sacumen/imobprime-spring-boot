@@ -62,10 +62,22 @@ public class PropertyJPA implements PropertyDAO {
 		
 		if(propertySearchDTO.getPriceMin() != null && propertySearchDTO.getPriceMax() != null) {
 			query += " and imovel.valor between :priceMin and :priceMax \n";
+			
+		} else if(propertySearchDTO.getPriceMin() != null) {
+			query += " and imovel.valor >= :priceMin \n";
+			
+		} else if(propertySearchDTO.getPriceMax() != null) {
+			query += " and imovel.valor <= :priceMax \n";
 		}
 		
 		if(propertySearchDTO.getAreaMin() != null && propertySearchDTO.getAreaMax() != null) {
 			query += " and imovel.area_total between :areaMin and :areaMax \n";
+			
+		} else if(propertySearchDTO.getAreaMin() != null) {
+			query += " and imovel.area_total >= :areaMin \n";
+			
+		} else if(propertySearchDTO.getAreaMax() != null) {
+			query += " and imovel.area_total <= :areaMax \n";
 		}
 		
 		query += 
@@ -93,10 +105,22 @@ public class PropertyJPA implements PropertyDAO {
 		if(propertySearchDTO.getPriceMin() != null && propertySearchDTO.getPriceMax() != null) {
 			q.setParameter("priceMin", propertySearchDTO.getPriceMin());
 			q.setParameter("priceMax", propertySearchDTO.getPriceMax());
+			
+		} else if(propertySearchDTO.getPriceMin() != null) {
+			q.setParameter("priceMin", propertySearchDTO.getPriceMin());
+			
+		} else if(propertySearchDTO.getPriceMax() != null) {
+			q.setParameter("priceMax", propertySearchDTO.getPriceMax());
 		}
 		
 		if(propertySearchDTO.getAreaMin() != null && propertySearchDTO.getAreaMax() != null) {
 			q.setParameter("areaMin", propertySearchDTO.getAreaMin());
+			q.setParameter("areaMax", propertySearchDTO.getAreaMax());
+			
+		} else if(propertySearchDTO.getAreaMin() != null) {
+			q.setParameter("areaMin", propertySearchDTO.getAreaMin());
+			
+		} else if(propertySearchDTO.getAreaMax() != null) {
 			q.setParameter("areaMax", propertySearchDTO.getAreaMax());
 		}
 		
