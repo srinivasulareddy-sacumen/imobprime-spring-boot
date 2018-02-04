@@ -19,6 +19,6 @@ O banco de teste mais atualizado esta localizado em **db/mysql/Dump20180202-imob
 
 ## Features to implement
 
-	- [ ] Authentication(afeta o frontend)
-	- [ ] Authorization
-	- [ ] Internacionalization(afeta o frontend)
+	- Authentication(afeta o frontend)
+	- Authorization
+	- Internacionalization(afeta o frontend)
