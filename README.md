@@ -1,34 +1,90 @@
 
-# iMobPrime - Backend implemented with Spring Boot
+# iMobPrime - Backend for a Real Estate Management App
 
-## Introduction
+This is a `Java Maven` project that has backend features and the REST API for the iMobPrime, an application for Real Estate Management. 
 
-This is a `Java Maven` project that has backend features and the REST API for the iMobPrime application.
+This project was developed with **Java 1.8** features.
 
 The backend was implemented with `Spring Boot`, the web server running is `Tomcat` and database runs on `MySQL`.
 
 This project has all REST endpoints required for the frontend project [imobprime-react](https://github.com/jorgealmeidajr/imobprime-react) to run.
 
-## Database
 
-The image below represents the physical modeling for the iMobPrime database implemented in MySQL. 
+## Table of Contents
 
-For the purpose of learning and testing, some tables in the modeling image(they are in red) have JSON columns, this is a feature more recent for MySQL. JSON columns has been supported by MySQL since version 5.7.8 and it is not supported by previous versions.
+- [Introduction](#introduction)
+- [Basic Usage](#basic-usage)
+- [What was learned or used in this project](#what-was-learned-or-used-in-this-project)
+- [Folder Structure](#folder-structure)
+- [Features](#features)
+- [Missing Features to implement](#missing-features-to-implement)
 
-![imobprime-db](https://user-images.githubusercontent.com/6424524/35780891-977ce99a-09c9-11e8-84a5-88e289785e34.png)
 
-This project provides one zip file containing the dump for a test database. 
+## Introduction
+
+This project was created to be a proof of concept for a prototype application. The purpose of this application is to manage real estates.
+
+This project was created to be used by `Real Estate Agents or Brokers` that have to manage many properties for their clients. Those `Real Estate Agents or Brokers` are associated and work with a `Real Estates Agency`. The last mentioned relationship is optional.
+
+For this application there are `Clients` and their data are managed by `Real Estate Agents or Brokers`. There are potential clients and clients who own properties managed by an agent. Those properties are available to sell or rent, and there are clients interested in a `Property` to buy or rent.
+
+This project is focusing in the `Real Estate Agents or Brokers` necessities, they are going to be the main actor for this project. This application will provide an easy and fast way for clients interested in searching properties available for sale or rent.
+
+
+## Basic Usage
+
+This project requires the database to be running. The database used for this project is **MySQL v5.7**.
+
+For the purpose of learning and testing, some tables have JSON columns, this is a feature more recent for MySQL. JSON columns has been supported by MySQL since version 5.7.8 and it is not supported by previous versions.
+
+This project provides one zip file containing the dump for a test database.
 
 The most updated test database is located in **db/mysql/Dump20180202-imobprime.zip**.
 
-## Features to implement
+You can start the server running the class **org.imobprime.IMobPrimeApplication** with the main method.
 
-- Authentication(this feature afeccts the frontend project)
 
-- Authorization
+## What was learned or used in this project
 
+- Java v1.8 features.
+- Spring Boot v1.5 features.
+- REST implementation with Spring.
+- Database calls with JdbcTemplate from Spring and JPA.
+- Entities with JPA annotations. 
+- Java v1.8 with Maven.
+- Usage of JSON columns in MySQL v5.7.
+
+
+## Folder Structure
+
+The folder structure of the project looks like this:
+
+```
+imobprime-spring-boot/
+	TODO
+```
+
+
+## Features
+
+This project has REST endpoints and they can be found in these classes:
+
+- Class **org.imobprime.controller.AgentRestController** for (Real Estate) Agent entity.
+- Class **org.imobprime.controller.CityRestController** for City entity. 
+- Class **org.imobprime.controller.ClientRestController** for Client entity.
+- Class **org.imobprime.controller.PropertyRestController** for Property entity.
+- Class **org.imobprime.controller.PropertyStateRestController** for PropertyState entity.
+- Class **org.imobprime.controller.PropertyTypeRestController** for PropertyType entity.
+- Class **org.imobprime.controller.RealEstateRestController** for RealEstate entity.
+- Class **org.imobprime.controller.SearchPropertyRestController** for Property entity and specialized in performing searches.
+- Class **org.imobprime.controller.StateRestController** for State entity.
+- Class **org.imobprime.controller.ZipCodeRestController** for ZipCode entity.
+
+
+## Missing Features to implement
+
+- Authentication (this feature afeccts the frontend project).
+- Authorization with `'admin'` and `'corretor'` profiles.
 - For authentication and authorization it is necessary to use the table **users**. There is nothing implemented for those features.
-
-- Internacionalization(this feature affects the frontend project)
-
-- Most of the features to implement are mentioned in the frontend project.
+- Internacionalization (this feature affects the frontend project).
+- Some features to implement are mentioned in the frontend project.
