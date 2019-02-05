@@ -69,16 +69,16 @@ The folder structure of the project looks like this:
 
 ```
 imobprime-spring-boot/
-  db/ 	-> dump files to create the database
-  doc/ 	-> files used for documentation
+  db/   -> dump files to create the database
+  doc/  -> files used for documentation
   src/
     main/java/
-	  org/imobprime/controller 		-> classes with REST endpoints
-	  org/imobprime/dao 			-> classes for database access with JPA
-	  org/imobprime/model 			-> JPA entities
+	  org/imobprime/controller   -> classes with REST endpoints
+	  org/imobprime/dao          -> classes for database access with JPA
+	  org/imobprime/model        -> JPA entities
 	  org/imobprime/repository
 	  org/imobprime/service
-	  IMobPrimeApplication.java 	-> class with the main method
+	  IMobPrimeApplication.java  -> class with the main method
 ```
 
 
