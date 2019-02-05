@@ -3,7 +3,7 @@
 
 This is a `Java Maven` project that has backend features and the REST API for the iMobPrime, an application for Real Estate Management. 
 
-This project was developed with **Java 1.8** features.
+This project was developed with **Java v1.8** features.
 
 The backend was implemented with `Spring Boot`, the web server running is `Tomcat` and database runs on `MySQL`.
 
@@ -29,6 +29,14 @@ This project was created to be used by `Real Estate Agents or Brokers` that have
 For this application there are `Clients` and their data are managed by `Real Estate Agents or Brokers`. There are potential clients and clients who own properties managed by an agent. Those properties are available to sell or rent, and there are clients interested in a `Property` to buy or rent.
 
 This project is focusing in the `Real Estate Agents or Brokers` necessities, they are going to be the main actor for this project. This application will provide an easy and fast way for clients interested in searching properties available for sale or rent.
+
+The image below represents the UML diagram of classes in the analysis phase:
+
+<img 
+	src="doc/UML class diagram v01.png" 
+	alt="Markdown Monster icon" 
+	style="display: block; margin-left: auto; margin-right: auto; width: 95%;" 
+/>
 
 
 ## Basic Usage
@@ -61,30 +69,28 @@ The folder structure of the project looks like this:
 
 ```
 imobprime-spring-boot/
-	TODO
+  db/ 	-> dump files to create the database
+  doc/ 	-> files used for documentation
+  src/
+    main/java/
+	  org/imobprime/controller 		-> classes with REST endpoints
+	  org/imobprime/dao 			-> classes for database access with JPA
+	  org/imobprime/model 			-> JPA entities
+	  org/imobprime/repository
+	  org/imobprime/service
+	  IMobPrimeApplication.java 	-> class with the main method
 ```
 
 
 ## Features
 
-This project has REST endpoints and they can be found in these classes:
-
-- Class **org.imobprime.controller.AgentRestController** for (Real Estate) Agent entity.
-- Class **org.imobprime.controller.CityRestController** for City entity. 
-- Class **org.imobprime.controller.ClientRestController** for Client entity.
-- Class **org.imobprime.controller.PropertyRestController** for Property entity.
-- Class **org.imobprime.controller.PropertyStateRestController** for PropertyState entity.
-- Class **org.imobprime.controller.PropertyTypeRestController** for PropertyType entity.
-- Class **org.imobprime.controller.RealEstateRestController** for RealEstate entity.
-- Class **org.imobprime.controller.SearchPropertyRestController** for Property entity and specialized in performing searches.
-- Class **org.imobprime.controller.StateRestController** for State entity.
-- Class **org.imobprime.controller.ZipCodeRestController** for ZipCode entity.
+- API REST endpoints in **org.imobprime.controller** package.
 
 
 ## Missing Features to implement
 
-- Authentication (this feature afeccts the frontend project).
+- Authentication (this feature affects the frontend project).
 - Authorization with `'admin'` and `'corretor'` profiles.
 - For authentication and authorization it is necessary to use the table **users**. There is nothing implemented for those features.
-- Internacionalization (this feature affects the frontend project).
+- Internationalization / i18n (this feature affects the frontend project).
 - Some features to implement are mentioned in the frontend project.
